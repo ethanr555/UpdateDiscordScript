@@ -16,6 +16,9 @@ if [ -e /tmp/discord.deb ]; then
 		echo Installation failed and aborted.
 		return 2
 	fi
+	# Now run discord if update was a success.
+	nohup discord > /dev/null & disown 
+	echo Starting Discord...
 else
 	echo Discord Debian pkg does not exist! Download must have failed.
 	return 1
