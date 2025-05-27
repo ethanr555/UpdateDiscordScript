@@ -11,7 +11,11 @@ wget -O /tmp/discord.deb 'https://discord.com/api/download/stable?platform=linux
 #If successful, install package
 
 if [ -e /tmp/discord.deb ]; then
-	sudo dpkg -i /tmp/discord.deb
+	if [[ -t 0 ]]; then
+		sudo dpkg -i /tmp/discord.deb
+	else
+		pkexec dpkg -i /tmp/discord.deb
+	fi
 	if [ $? -ne 0 ]; then
 		echo Installation failed and aborted.
 		return 2
